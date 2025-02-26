@@ -1,0 +1,130 @@
+/* Reset Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styles */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #1A1A1A; /* Neutral dark gray background */
+    color: #E5E5E5; /* Soft white text */
+    line-height: 1.8;
+    padding: 0 20px;
+}
+
+/* Header Styles - Unchanged */
+
+/* Blog Section */
+#blog-section {
+    margin: 40px auto;
+    max-width: 900px;
+    background: #2A2A2A; /* Neutral dark gray */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#blog-section h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #FFFFFF;
+    border-bottom: 2px solid #444444;
+    padding-bottom: 10px;
+}
+
+#posts-container {
+    margin-top: 20px;
+}
+
+#posts-container .link-to-post {
+    font-size: 18px;
+    display: inline-block;
+    margin: 10px 0;
+    color: #9D9DFF; /* Grayscale-friendly link color */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+#posts-container .link-to-post:hover {
+    color: #B3B3FF;
+    text-decoration: underline;
+}
+
+#posts-container .fa-file-lines {
+    color: #5B6681; /* Grayish blue */
+    margin-right: 8px;
+}
+
+#posts-container .post-sep {
+    border: none;
+    border-bottom: 1px solid #444444;
+    margin: 15px 0;
+}
+
+/* Pagination */
+#pages {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#pages a {
+    color: #9D9DFF;
+    margin: 0 8px;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 12px;
+    border: 1px solid #444444;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#pages a:hover {
+    background-color: #444444;
+    color: #FFFFFF;
+}
+
+#pages .current-page {
+    font-weight: bold;
+    color: #FFFFFF;
+    border-bottom: 2px solid #9D9DFF;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #2E2E2E;
+    color: #E5E5E5;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    border-top: 1px solid #444444;
+}
+
+footer p {
+    font-size: 14px;
+}
+
+/* Link Styles */
+a {
+    color: #9D9DFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #B3B3FF;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    #blog-section {
+        padding: 15px;
+    }
+
+    .pagination a {
+        padding: 5px 8px;
+        font-size: 14px;
+    }
+}

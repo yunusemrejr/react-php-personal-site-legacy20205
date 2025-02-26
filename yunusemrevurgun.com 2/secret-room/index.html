@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" x-data="secretRoom()" x-init="init()" style="height: 100vh; margin: 0;">
+<head>
+    <!-- Start Open Web Analytics Tracker -->
+    <script type="text/javascript">
+//<![CDATA[
+var owa_baseUrl = 'https://gor.bio/analytics/';
+var owa_cmds = owa_cmds || [];
+owa_cmds.push(['setSiteId', 'f078cf651d6c4bd497f0a3bf53b4c5a9']);
+owa_cmds.push(['trackPageView']);
+owa_cmds.push(['trackClicks']);
+
+(function() {
+    var _owa = document.createElement('script'); _owa.type = 'text/javascript'; _owa.async = true;
+    owa_baseUrl = ('https:' == document.location.protocol ? window.owa_baseSecUrl || owa_baseUrl.replace(/http:/, 'https:') : owa_baseUrl );
+    _owa.src = owa_baseUrl + 'modules/base/dist/owa.tracker.js';
+    var _owa_s = document.getElementsByTagName('script')[0]; _owa_s.parentNode.insertBefore(_owa, _owa_s);
+}());
+//]]>
+</script>
+<!-- End Open Web Analytics Code -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Yunus' Secret Room</title>
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.2/dist/cdn.min.js"></script>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #333333);
+            color: #f2f2f2;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Title */
+        .title {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 3rem;
+            color: #ff7518;
+            text-shadow: 2px 2px 5px #000;
+            animation: flicker 3s infinite;
+            word-wrap: break-word;
+        }
+
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                opacity: 0.4;
+            }
+        }
+
+        /* Walking Pumpkins */
+        .pumpkin {
+            position: absolute;
+            bottom: 10%;
+            width: 80px;
+            animation: walk linear infinite;
+            cursor: pointer;
+            user-select: none;
+            pointer-events: auto;
+            max-width: 100%;
+        }
+
+        /* Walk Animation */
+        @keyframes walk {
+            0% {
+                transform: translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100vw) rotate(360deg);
+                opacity: 0.9;
+            }
+        }
+
+        /* Background Animation */
+        .starry-background {
+            position: absolute;
+            z-index:-1;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('stars.jpg'); /* Add a starry background image */
+            background-repeat: repeat;
+            animation: starsMove 15s linear infinite;
+        }
+
+        @keyframes starsMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 1000px 1000px; }
+        }
+
+        /* Fact Popup */
+        .fact-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: rgba(0, 0, 0, 0.85);
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px #ff7518;
+            display: none;
+            z-index: 1000;
+            max-width: 90%;
+            text-align: center;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .fact-popup.visible {
+            display: block;
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .close-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #ff7518;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .close-btn:hover {
+            background: #e06500;
+        }
+
+        /* Mute Button */
+        .mute-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: #ff7518;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+            z-index: 10;
+        }
+
+        .mute-btn:hover {
+            background: #e06500;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+                margin-top: 10px;
+            }
+
+            img {
+                width: 80%;
+                max-width: 250px;
+            }
+
+            .fact-popup {
+                max-width: 80%;
+                padding: 15px 20px;
+            }
+
+            .close-btn {
+                width: 100%;
+                padding: 12px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 1.5rem;
+                margin-top: 5px;
+            }
+
+            .pumpkin {
+                width: 60px;
+            }
+
+            .fact-popup {
+                max-width: 90%;
+                padding: 10px 15px;
+            }
+
+            .close-btn {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="starry-background"></div>
+
+    <!-- Title -->
+    <h1 class="title">Yunus' Secret Room</h1>
+    <img src="yunus.png" width="300" style="margin:auto;justify-content:center;text-align:center;display:block;">
+
+    <!-- Walking Pumpkins -->
+    <div class="rain">
+        <template x-for="pumpkin in pumpkins" :key="pumpkin.id">
+            <img 
+                src="pumpkin.gif" 
+                class="pumpkin" 
+                :style="`
+                    left: ${pumpkin.left}%;
+                    bottom: ${pumpkin.bottom}%;
+                    animation-duration: ${pumpkin.duration}s;
+                    animation-delay: ${pumpkin.delay}s;
+                    transform: scaleX(${pumpkin.direction});
+                `"
+                draggable="false" 
+                @click="showFact"
+                alt="Pumpkin">
+        </template>
+    </div>
+
+    <!-- Fact Popup -->
+    <div class="fact-popup" :class="{'visible': factVisible}">
+        <p x-text="currentFact"></p>
+        <button class="close-btn" @click="factVisible = false" aria-label="Close the popup">Close</button>
+    </div>
+
+ 
+
+    <!-- Background Halloween Audio 
+    <audio id="background-audio" autoplay loop>
+        <source src="halloween-theme.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+-->
+    <!-- Alpine.js Component -->
+    <script>
+        function secretRoom() {
+            return {
+                pumpkins: [],
+                factVisible: false,
+                currentFact: '',
+                facts: [
+                    "The tradition of carving jack-o'-lanterns comes from an Irish myth about a man named Stingy Jack.",
+                    "Halloween is the second highest-grossing commercial holiday after Christmas.",
+                    "Black cats are considered a symbol of bad luck in many cultures during Halloween.",
+                    "Candy corn was first created in the 1880s and was originally called 'Chicken Feed'.",
+                    "The largest pumpkin ever recorded weighed over 2,600 pounds.",
+                    "Bats are associated with Halloween due to their nocturnal nature and appearance in folklore.",
+                    "The fear of Halloween is known as Samhainophobia.",
+                    "Trick-or-treating dates back to the Middle Ages in Europe.",
+                    "Pumpkins are actually a fruit, not a vegetable!"
+                ],
+                init() {
+                    this.pumpkins = [];
+                    for (let i = 0; i < 20; i++) {
+                        const isRightToLeft = Math.random() > 0.5;
+                        this.pumpkins.push({
+                            id: crypto.randomUUID(),
+                            left: isRightToLeft ? 100 : -10,
+                            bottom: 10 + Math.random() * 20,
+                            duration: 10 + Math.random() * 10,
+                            delay: Math.random() * 5,
+                            direction: isRightToLeft ? -1 : 1
+                        });
+                    }
+                },
+                showFact() {
+                    const randomIndex = Math.floor(Math.random() * this.facts.length);
+                    this.currentFact = this.facts[randomIndex];
+                    this.factVisible = true;
+                },
+                toggleAudio() {
+                    const audio = document.getElementById("background-audio");
+                     
+                }
+            };
+        }
+        
+        
+        
+        function showHalloweenPopup() {
+    // Create the overlay background
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    overlay.style.display = 'flex';
+    overlay.style.justifyContent = 'center';
+    overlay.style.alignItems = 'center';
+    overlay.style.zIndex = '1000';
+
+    // Create the popup container
+    const popup = document.createElement('div');
+    popup.style.backgroundColor = '#ff6f61';
+    popup.style.border = '2px solid #fff';
+    popup.style.borderRadius = '10px';
+    popup.style.padding = '20px';
+    popup.style.textAlign = 'center';
+    popup.style.color = '#fff';
+    popup.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.5)';
+
+    // Add the text message
+    const message = document.createElement('p');
+    message.textContent = 'Would you like to stay here in this Halloween theme room or go even crazier?';
+    message.style.fontSize = '18px';
+    message.style.marginBottom = '20px';
+    popup.appendChild(message);
+
+    // Create the Stay button
+    const stayButton = document.createElement('button');
+    stayButton.textContent = 'Stay';
+    stayButton.style.margin = '0 10px';
+    stayButton.style.padding = '10px 20px';
+    stayButton.style.border = 'none';
+    stayButton.style.borderRadius = '5px';
+    stayButton.style.backgroundColor = '#2ecc71';
+    stayButton.style.color = '#fff';
+    stayButton.style.cursor = 'pointer';
+    stayButton.onclick = () => {
+        alert('Great choice!');
+        document.body.removeChild(overlay);
+    };
+    popup.appendChild(stayButton);
+
+    // Create the Go Crazy button
+    const goCrazyButton = document.createElement('button');
+    goCrazyButton.textContent = 'Go Crazy';
+    goCrazyButton.style.margin = '0 10px';
+    goCrazyButton.style.padding = '10px 20px';
+    goCrazyButton.style.border = 'none';
+    goCrazyButton.style.borderRadius = '5px';
+    goCrazyButton.style.backgroundColor = '#e74c3c';
+    goCrazyButton.style.color = '#fff';
+    goCrazyButton.style.cursor = 'pointer';
+    goCrazyButton.onclick = () => {
+        alert('Going even crazier! Hold tight!');
+        location.href='crazy.html';
+    };
+    popup.appendChild(goCrazyButton);
+
+    // Append the popup to the overlay
+    overlay.appendChild(popup);
+
+    // Append the overlay to the body
+    document.body.appendChild(overlay);
+}showHalloweenPopup();
+
+    </script>
+</body>
+</html>

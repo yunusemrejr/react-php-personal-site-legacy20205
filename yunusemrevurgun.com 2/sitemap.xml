@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+	<url>
+		<loc>https://yunusemrevurgun.com/index/</loc>
+	</url>
+	<url>
+		<loc>https://yunusemrevurgun.com/index/about</loc>
+	</url>
+		<url>
+		<loc>https://yunusemrevurgun.com/index/gallery</loc> 
+	</url>
+			<url>
+		<loc>https://yunusemrevurgun.com/index/updates</loc>
+	</url>
+		<url>
+		<loc>https://yunusemrevurgun.com/blog/</loc>
+	</url>
+			<url>
+		<loc>https://yunusemrevurgun.com/blog/sitemap/sitemap.xml</loc>
+	</url>
+	
+				<url>
+		<loc>https://yunusemrevurgun.com/secret-room</loc>
+	</url>
+</urlset>

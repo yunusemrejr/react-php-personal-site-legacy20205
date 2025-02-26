@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="icon" href="https://yunusemrevurgun.com/index/icon.ico"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="theme-color" content="#000000"/>
+    <meta name="description" content="Yunus Emre Vurgun - Personal Website"/>
+    <title>Yunus Emre Vurgun</title>
+    <script defer src="https://yunusemrevurgun.com/index/static/js/main.5d9cfac9.js"></script>
+    <link href="https://yunusemrevurgun.com/index/static/css/main.5dd47e10.css" rel="stylesheet">
+</head>
+<body>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<div id="root"></div>
+
+<script>
+    // Initial redirections for specific paths
+    if (location.href.includes('/index/gallery.html')) {
+        location.href = 'https://yunusemrevurgun.com/index/gallery';
+    } else if (location.href.includes('/index/about.html')) {
+        location.href = 'https://yunusemrevurgun.com/index/about';
+    } else if (location.href.includes('yunusemrevurgun.com/index/index.html') || location.href.includes('yunusemrevurgun.com/index/home')) {
+        location.href = 'https://yunusemrevurgun.com/index/';
+    } else if (location.href.includes('index/social-other')) {
+            location.href = 'https://yunusemrevurgun.com/index/social-other/index.html';
+        }else if (location.href.includes('index/music')) {
+            location.href = 'https://yunusemrevurgun.com/index/music/index.html';
+        }
+
+    // Scroll to bottom if navigating to 'about#root.email'
+    if (location.href.includes('about#root.email')) {
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                window.scrollTo(0, document.body.scrollHeight);
+            }, 1000);
+        });
+    }
+
+    // Repeated checks every second for ongoing redirects
+    setInterval(() => {
+        if (location.href.includes('yunusemrevurgun.com/index/home')) {
+            location.href = 'https://yunusemrevurgun.com/index/';
+        } else if (location.href.includes('index/blog')) {
+            location.href = 'https://yunusemrevurgun.com/blog';
+        } else if (location.href.includes('index/gallery')) {
+            location.href = 'https://yunusemrevurgun.com/index/gallery/gallery.html';
+        } else if (location.href.includes('index/updates')) {
+            location.href = 'https://yunusemrevurgun.com/wooden-log/';
+        }
+
+        // Redirect to index page if URL doesn't match allowed paths
+        const urlPattern = /yunusemrevurgun\.com\/index\/(about|blog|updates|gallery|projects)/;
+        if (!urlPattern.test(location.href) && !location.href.endsWith("yunusemrevurgun.com/index/")) {
+            location.href = 'https://yunusemrevurgun.com/index/';
+        }
+    }, 1000);
+
+    // Mutation observer to replace elements with dynamic content placeholder
+    document.addEventListener("DOMContentLoaded", () => {
+        const observer = new MutationObserver((mutationsList) => {
+            mutationsList.forEach(mutation => {
+                mutation.addedNodes.forEach(node => {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        node.querySelectorAll("*").forEach(element => {
+                            if (element.textContent.includes("DYNAMIC_CONTENT")) {
+                                element.textContent = "";
+                                const img = document.createElement("img");
+                                img.src = "https://yunusemrevurgun.com/index/loading-gif.gif";
+                                img.width = 50;
+                                img.height = 50;
+                                img.alt = "Loading";
+                                element.appendChild(img);
+                            }
+                        });
+                    }
+                });
+            });
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+    });
+    
+    
+    document.body.style.filter = 'grayscale(100%)';
+
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ 
+<script>
+let already = 0;
+
+function card(pgrid) {
+  const newEl = document.createElement('div');
+  newEl.className = 'project-card personal';
+  newEl.style.opacity = '1';
+  newEl.style.transform = 'none';
+
+  newEl.innerHTML = `
+    <style>
+      .fa-robot {
+        font-size: 28px !important;
+        color: white;
+      }
+    </style>
+    <div>
+      <i class="fa-solid fa-robot"></i>
+      <h3>Eternal Griffin AI</h3>
+      <p>This is one of the coolest projects where I let users interact with my AI tools right in their browsers.</p>
+      <a href="https://eternalgriffin.com" target="_blank" rel="noopener noreferrer" class="project-link">
+        View Project
+        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" 
+          stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" 
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+      </a>
+    </div>
+  `;
+
+  pgrid.insertBefore(newEl, pgrid.firstChild);
+
+  const existingCard = document.querySelector('.projects-grid .personal');
+  if (existingCard) {
+    const computedStyle = getComputedStyle(existingCard);
+    Object.assign(newEl.style, {
+      backgroundColor: computedStyle.backgroundColor,
+      border: computedStyle.border,
+      borderRadius: computedStyle.borderRadius,
+      padding: computedStyle.padding,
+    });
+  }
+}
+
+function modder(reset) {
+  if (reset === true) {
+    already = 0;
+  }
+
+  const pgrid = Array.from(document.querySelectorAll('.projects-grid'))[1];
+  if (!pgrid) return;
+
+  if (document.body.innerHTML.includes('Griffin')) {
+    already++;
+  }
+
+  if (already < 2) {
+    card(pgrid);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => {
+    const linkElement = document.querySelector('a[href="https://bsky.app/profile/yunusemrevurgun.bsky.social"]');
+    if (linkElement) {
+      const svgElement = linkElement.querySelector("svg");
+      if (svgElement) {
+        svgElement.remove();
+        const icon = document.createElement('i');
+        icon.className = 'fa-brands fa-bluesky';
+        linkElement.insertBefore(icon, linkElement.firstChild);
+      }
+    }
+
+    // Initial attempt
+    function action1() {
+      const intervalId = setInterval(() => {
+        modder(false);
+        if (document.body.innerHTML.includes('Griffin')) {
+          clearInterval(intervalId);
+        }
+      }, 500);
+    }
+    action1();
+
+    // Use a MutationObserver to detect route changes in a React SPA
+    // that may re-render `.projects-grid`.
+    const observer = new MutationObserver(() => {
+      const pgrid = document.querySelectorAll('.projects-grid')[1];
+      if (pgrid && !document.body.innerHTML.includes('Griffin')) {
+        // Run modder when we detect the grid reappears on a route change
+        modder(true);
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+  }, 1000);
+});
+
+ 
+function refreshIfNoGriffinOnProjects() {
+  if (window.location.pathname === '/projects') {
+    setTimeout(() => {
+      if (!document.body.innerHTML.includes('Griffin')) {
+        window.location.reload();
+      }
+    }, 2000);  // Delay for 2 seconds
+  }
+}
+
+// This will check the condition every 500ms
+setInterval(refreshIfNoGriffinOnProjects, 500);
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const detectProjects = () => {
+    if (window.location.href.includes("projects") && !window.location.href.includes("?r=t")) {
+      window.location.href=window.location.href+"/?r=t";
+    }
+  };
+
+  // Initial check
+  detectProjects();
+
+  // Override pushState and replaceState
+  const originalPushState = history.pushState;
+  history.pushState = function(...args) {
+    originalPushState.apply(this, args);
+    detectProjects();
+  };
+
+  const originalReplaceState = history.replaceState;
+  history.replaceState = function(...args) {
+    originalReplaceState.apply(this, args);
+    detectProjects();
+  };
+
+  // Also listen to popstate
+  window.addEventListener('popstate', detectProjects);
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    if(location.href==("https://yunusemrevurgun.com/index/")){
+    setTimeout(()=>{
+  const secretRoomBtnContentHolder = document.createElement('div');
+
+  const secretRoomBtnContent = `<style>
+    .floating-btn[data-astro-cid-n36wfrx6] {
+       bottom: 254px;
+      right: 30%;
+      background: linear-gradient(to right, #0000, #6366f1);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 9999px;
+      box-shadow: 0 4px 6px #0000001a;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all .2s;
+      z-index: 1000;
+    }
+    .floating-btn[data-astro-cid-n36wfrx6]:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 8px #0003;
+    }
+    .btn-icon[data-astro-cid-n36wfrx6] {
+      width: 10px;
+      height: 10px;
+    }
+  </style>
+  <button class="floating-btn" onClick="window.location.href = 'https://yunusemrevurgun.com/secret-room/'" data-astro-cid-n36wfrx6> 
+    <span data-astro-cid-n36wfrx6>Secret Room</span> 
+    <svg xmlns="http://www.w3.org/2000/svg" class="btn-icon" viewBox="0 0 20 20" fill="currentColor" data-astro-cid-n36wfrx6> 
+      <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" data-astro-cid-n36wfrx6></path> 
+    </svg> 
+  </button>`;
+
+  secretRoomBtnContentHolder.innerHTML = secretRoomBtnContent;
+
+  const parentToPasteInto = document.querySelector('.social-links');
+  
+  // Check if parentToPasteInto exists
+  if (parentToPasteInto) {
+    // Now proceed to find the sibling and insert the button
+    const siblingToPasteNextTo = parentToPasteInto.querySelector('a[href="https://x.com/yunusemrevrgn"]');
+    
+    if (siblingToPasteNextTo) {
+      siblingToPasteNextTo.insertAdjacentElement('afterend', secretRoomBtnContentHolder);
+    } else {
+      console.error('The sibling element was not found!');
+    }
+  } else {
+    console.error('The parent .footer element was not found!');
+  }
+    },2000);
+    }
+});
+
+
+</script>
+
+
+</body>
+</html>

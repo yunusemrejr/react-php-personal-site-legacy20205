@@ -1,0 +1,53 @@
+.blog-container,
+.updates-container,
+.gallery-container {
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: #0a192f;
+  color: #8892b0;
+}
+
+.blog-content,
+.updates-content,
+.gallery-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: rgba(10, 25, 47, 0.85);
+  padding: 2rem;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+h1 {
+  color: #64ffda;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.placeholder-content {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #8892b0;
+  padding: 2rem;
+  border: 1px dashed rgba(100, 255, 218, 0.3);
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .blog-container,
+  .updates-container,
+  .gallery-container {
+    padding: 1rem;
+  }
+
+  .blog-content,
+  .updates-content,
+  .gallery-content {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+}

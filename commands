@@ -1,0 +1,3 @@
+# Create the icon and place it in the public folder
+touch public/icon.ico
+# Copy the generated icon data into icon.ico
